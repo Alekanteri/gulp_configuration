@@ -1,2 +1,7 @@
-# gulp_configuration
- GULP config
+# Gulp Configuration
+
+## Scripts
+
+### `yarn start`
+
+Standard gulp script
