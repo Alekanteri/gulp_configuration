@@ -10,6 +10,7 @@ import { server } from "./gulp/tasks/server.js";
 import { scss } from "./gulp/tasks/scss.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
+import { otfTottf, ttfToWoff, fontsStyle } from "./gulp/tasks/fonts.js";
 //! ------------ //
 
 global.app = {
@@ -27,7 +28,11 @@ const watcher = () => {
 };
 
 //* Compact task-manager //
-const mainTasks = gulp.parallel(copy, html, scss, js, images);
+const fonts = gulp.series(otfTottf, ttfToWoff, fontsStyle);
+const mainTasks = gulp.series(
+  fonts,
+  gulp.parallel(copy, html, scss, js, images)
+);
 const serverTask = gulp.parallel(watcher, server);
 
 const dev = gulp.series(clear, mainTasks, serverTask);
